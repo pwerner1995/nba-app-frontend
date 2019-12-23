@@ -9,21 +9,24 @@ import Typography from '@material-ui/core/Typography'
 class App extends React.Component{
   
   state = {
-    games: []
+    teams: []
   }
 
   componentDidMount(){
-    fetch("https://api-nba-v1.p.rapidapi.com/leagues/", {
-      headers:{
-        "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-	      "x-rapidapi-key": "3f7b8337f8msh54164a2afdb63a2p12c84fjsn17115393b37d"
+    fetch("http://localhost:3000/teams",{
+      headrs:{
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        'Access-Control-Allow-Credentials': 'true'
       }
     })
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => this.setState({teams: [...data]}))
   }
 
   render(){
+  
     
     return (
       <div id="App" style={{backgroundColor: "black", color:"white"}}>
@@ -33,7 +36,7 @@ class App extends React.Component{
         </AppBar>
         <br/>
         <Switch>
-            <Route path="/home" render={()=> <GameContainer games={this.state.games}/>}/>
+            <Route path="/home" render={()=> <GameContainer teams={this.state.teams}/>}/>
         </Switch>
       </div>
     );

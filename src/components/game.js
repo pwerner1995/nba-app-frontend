@@ -9,7 +9,10 @@ class Game extends React.Component{
             <Card>
                 <br/>
                 <div className="extra content" style={{border: "white; 2px"}}>
-                    {this.props.game.teams[0]}({this.props.game.sites[0].odds.spreads.points[0]}) vs {this.props.game.teams[1]}({this.props.game.sites[0].odds.spreads.points[1]})
+                    <img src= {this.props.team.logo} style = {{border: "1px solid #ddd",
+                                                                    padding: "5px",
+                                                                    width: "50px"}}/>
+                    {this.props.team.full_name}
                     
                 </div>
             </Card>
