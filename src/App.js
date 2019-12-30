@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
-import GameContainer from './components/gameContainer'
+import Standings from './components/standings'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 
@@ -13,6 +13,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
+    
     fetch("http://localhost:3000/teams",{
       headrs:{
         "Content-Type": "application/json",
@@ -22,21 +23,23 @@ class App extends React.Component{
       }
     })
     .then(resp => resp.json())
-    .then(data => this.setState({teams: [...data]}))
+    .then(data => this.setState({teams: [...data]})) 
+    
   }
 
   render(){
-  
-    
+    console.log(this.state.teams)
     return (
       <div id="App" style={{backgroundColor: "black", color:"white"}}>
-        <AppBar style={{backgroundColor: "black", color:"white"}}><Typography variant="h6">
-                NBA by Pete
-              </Typography>
+        <AppBar style={{backgroundColor: "black", color:"white", marginBottom:"50px"}}>
+                <img src={"https://www.stickpng.com/assets/images/58428defa6515b1e0ad75ab4.png"} style = {{maxWidth: "6%", maxHeight: "8%"}} />
+              
         </AppBar>
         <br/>
-        <Switch>
-            <Route path="/home" render={()=> <GameContainer teams={this.state.teams}/>}/>
+        <br/>
+        <br/>
+        <Switch >
+            <Route path="/standings" render={()=><Standings  teams = {this.state.teams}/>}/>
         </Switch>
       </div>
     );
